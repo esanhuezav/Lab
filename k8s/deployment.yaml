@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: agenda-deploy
+  namespace: agenda-pvc
+  labels:
+    app: agenda
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: agenda
+  template:
+    metadata:
+      labels:
+        app: agenda
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+        runAsNonRoot: true
+      containers:
+      - name: web
+        image: esanhuezav/agendapvc # CAMBIA AQUI LA CUENTA/REPOSITORIO DE DOCKER HUB
+        ports:
+          - containerPort: 3000
+        env:
+          - name: DATA_DIR
+            value: "/data"
+          - name: DATA_FILE
+            value: "contacts.json"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+          initialDelaySeconds: 3
+          periodSeconds: 5
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "128Mi"
+          limits:
+            cpu: "250m"
+            memory: "256Mi"
+        volumeMounts:
+          - name: data
+            mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: contacts-pvc

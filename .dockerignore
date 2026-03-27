@@ -1,0 +1,11 @@
+# evita copiar node_modules del host (causa del ELF inválido)
+app/node_modules
+**/node_modules
+
+# basura
+npm-debug.log
+Dockerfile
+docker-compose.yml
+.git
+.gitignore
+.DS_Store
