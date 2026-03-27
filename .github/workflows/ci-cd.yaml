@@ -22,13 +22,13 @@ jobs:
         with:
           context: .
           push: true
-          tags: esanhuezav/Lab:${{ github.sha }}
+          tags: esanhuezav/lab:${{ github.sha }}
 
       - name: Update manifests repo
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          sed -i "s|esanhuezav/Lab:.*|esanhuezav/Lab:${{ github.sha }}|" manifests/deployment.yaml
+          sed -i "s|esanhuezav/lab:.*|esanhuezav/lab:${{ github.sha }}|" manifests/deployment.yaml
           git add manifests/deployment.yaml
           git commit -m "Update image to ${{ github.sha }}"
           git push
