@@ -26,8 +26,8 @@ jobs:
 
       - name: Update manifests repo
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          git config user.name "esanhuezav"
+          git config user.email "esteban.sanhueza.varas@gmail.com"
           sed -i "s|esanhuezav/lab:.*|esanhuezav/lab:${{ github.sha }}|" k8s/deployment.yaml
           git add k8s/deployment.yaml
           git commit -m "Update image to ${{ github.sha }}"
