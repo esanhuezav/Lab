@@ -21,7 +21,7 @@ spec:
         runAsNonRoot: true
       containers:
       - name: web
-        image: esanhuezav/agendapvc # CAMBIA AQUI LA CUENTA/REPOSITORIO DE DOCKER HUB
+        image: esanhuezav/agendapvc
         ports:
           - containerPort: 3000
         env:
