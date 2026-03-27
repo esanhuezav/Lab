@@ -30,5 +30,5 @@ jobs:
           git config user.email "esteban.sanhueza.varas@gmail.com"
           sed -i "s|esanhuezav/lab:.*|esanhuezav/lab:${{ github.sha }}|" k8s/deployment.yaml
           git add k8s/deployment.yaml
-          git commit -m "Update image to ${{ github.sha }}"
-          git push
+          git commit -m "Update image to ${{ github.sha }}" || echo "No changes to commit"
+          git push || echo "No changes to push"

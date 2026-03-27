@@ -23,7 +23,7 @@ function readContacts() {
     const raw = fs.readFileSync(DATA_PATH, 'utf8');
     return JSON.parse(raw);
   } catch (e) {
-    console.error('Error leyendo contactos:', e.message);
+    console.error('Error leyendo contactos para la agenda:', e.message);
     return [];
   }
 }
